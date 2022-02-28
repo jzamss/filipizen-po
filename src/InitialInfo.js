@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   Text,
   Title,
@@ -13,15 +13,9 @@ import {
   Integer,
   Panel,
   Card
-} from 'rsi-react-web-components'
+} from "rsi-react-web-components";
 
-const InitialInfo = ({
-  title,
-  partner,
-  moveNextStep,
-  movePrevStep,
-}) => {
-
+const InitialInfo = ({ title, partner, moveNextStep, movePrevStep }) => {
   const [ctx, dispatch] = useData();
   const { txntype } = ctx;
 
@@ -32,47 +26,53 @@ const InitialInfo = ({
   const loadBill = () => {
     setProcessing(true);
     setError(null);
-    const svc = Service.lookup(`${partner.id}:OnlinePoService`, "po");
-    svc.invoke("getBilling", {txntype, refno}, (err, po) => {
+    const svc = Service.lookup(`${partner.channelid}:OnlinePoService`, "po");
+    svc.invoke("getBilling", { txntype, refno }, (err, po) => {
       if (err) {
-        setError("An internal error is encountered. Please try again later or contact LGU for assistance.");
+        setError(
+          "An internal error is encountered. Please try again later or contact LGU for assistance."
+        );
       } else {
-        dispatch({type: "SET_BILL", refno: refno, bill: po});
+        dispatch({ type: "SET_BILL", refno: refno, bill: po });
         setError(null);
         moveNextStep();
       }
       setProcessing(false);
-    })
-  }
+    });
+  };
 
   return (
     <React.Fragment>
-    <Card>
-      <Title>{title}</Title>
-      <Subtitle>Initial Information</Subtitle>
-      <Spacer />
-      <Error msg={error} />
-      <Panel>
-        <Text
-          caption='Payment Order No.'
-          name='refno'
-          value={refno}
-          onChange={setRefno}
-          readOnly={processing}
-          autoFocus={true}
-          required={true}
-        />
-      </Panel>
-      <ActionBar>
-        <BackLink caption='Cancel' variant="text" action={movePrevStep} />
-        <Button caption='Next' action={loadBill} 
-          processing={processing} 
-          disableWhen={processing || !refno || refno.trim().length === 0 ? true : false }
-        />
-      </ActionBar>
-    </Card>
+      <Card>
+        <Title>{title}</Title>
+        <Subtitle>Initial Information</Subtitle>
+        <Spacer />
+        <Error msg={error} />
+        <Panel>
+          <Text
+            caption="Payment Order No."
+            name="refno"
+            value={refno}
+            onChange={setRefno}
+            readOnly={processing}
+            autoFocus={true}
+            required={true}
+          />
+        </Panel>
+        <ActionBar>
+          <BackLink caption="Cancel" variant="text" action={movePrevStep} />
+          <Button
+            caption="Next"
+            action={loadBill}
+            processing={processing}
+            disableWhen={
+              processing || !refno || refno.trim().length === 0 ? true : false
+            }
+          />
+        </ActionBar>
+      </Card>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default InitialInfo
+export default InitialInfo;

@@ -1,6 +1,6 @@
 {
   "name": "filipizen-po",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Filipizen Payment Order",
   "author": "ramesesinc",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^4.0.3",
-    "rsi-react-filipizen-components": "^0.2.41",
+    "rsi-react-filipizen-components": "^0.3.0",
     "rsi-react-web-components": "^0.2.42"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^4.0.3",
-    "rsi-react-filipizen-components": "^0.2.41",
+    "rsi-react-filipizen-components": "^0.3.0",
     "rsi-react-web-components": "^0.2.42"
   },
   "files": [
